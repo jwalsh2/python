@@ -16,8 +16,8 @@ for line in fh:
     line = line.split(delimiter)
     svr = line[0].split(' ')
    # print svr[0] removes trailing HEX from vCD
-    row = (svr[0], line[13], line[2])
-    cmdb.append(row)   
+    row = (svr[0], line[12], line[2])
+    cmdb.append(row)
 # print cmdb # Debug line
 
 name2 = raw_input('Enter name of the Satellite Export File for Red Hat 6: ')
@@ -44,14 +44,14 @@ rh7svr = list()
 
 for line in fh:
     delimiter = ','
-    line = line.split(delimiter)  
+    line = line.split(delimiter)
     # go clean up the FQDN, drop after the .
-    rh7svr = line[0].split('.')    
+    rh7svr = line[0].split('.')
     rh7.append(rh7svr[0])
 
 # rh6 is a list that has the scrubbed names of RHEL 6 servers
 # rh7 is a list that has the scrubbed names of RHEL 7 servers
-    
+
 print'========================================================================='
 print 'Servers in the CMDB: ', len(cmdb)
 print 'Red Hat 6 servers needing patch: ',len(rh6)
@@ -69,21 +69,21 @@ for server in cmdb:
 #    svr2 = server[1].split('.')
     if server[0] in rh6:
         rh6patch.append(server[0])
-        fout6.write(server[0]+'\n')
+        fout6.write(server[0]+' | '+server[1]+' | '+server[2]+'\n')
         #if svr2[0] not in rh6:
             #rh6patch.append(svr2[0])
-            #fout6.write(svr2[0]+'\n')        
+            #fout6.write(svr2[0]+'\n')
         #if server[1] not in rh6:
             #rh6patch.append(server[1])
             #fout6.write(server[1]+'\n')
-       
-            
+
+
     if server[0] in rh7:
         rh7patch.append(server[0])
-        fout7.write(server[0]+'\n')
+        fout7.write(server[0]+' | '+server[1]+' | '+server[2]+'\n')
         #if server[2] in rh7:
             #rh7patch.append(server[2])
-            #fout7.write(server[2]+'\n')            
+            #fout7.write(server[2]+'\n')
 
 print ' '
 print '... ... Calculating and Creating Output Files ... ... '
